@@ -17,7 +17,7 @@
 /// # Example
 ///
 /// ```rust
-/// use rs_utils::types::ByteOrder;
+/// use rsutil::types::ByteOrder;
 ///
 /// #[cfg(target_endian = "little")]
 /// assert!(ByteOrder::Native.is_little());

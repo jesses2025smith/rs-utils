@@ -1,6 +1,6 @@
-# `rs-utils`
+# `rsutil`
 
-`rs-utils` is a Rust-based utility library designed to simplify and enhance communication-related tasks.
+`rsutil` is a Rust-based utility library designed to simplify and enhance communication-related tasks.
 It provides a collection of tools and functions to streamline common operations in communication systems.
 
 ## Features
@@ -15,7 +15,7 @@ Add the following to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-rs-utils = { version = "0.1", features = ["full"] }
+rsutil = { version = "0.1", features = ["full"] }
 ```
 
 ## Contributing

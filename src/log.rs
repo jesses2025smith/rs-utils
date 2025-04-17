@@ -18,11 +18,11 @@
 //!
 //! ```rust
 //!
-//! rs_utils::log::trace!("This is a trace message: {}", 2);
-//! rs_utils::log::debug!("Debugging value: {:?}", Box::new(42));
-//! rs_utils::log::info!("Application started successfully.");
-//! rs_utils::log::warn!("This might cause an issue: {}", "low disk space");
-//! rs_utils::log::error!("An error occurred: {}", "error_message");
+//! rsutil::log::trace!("This is a trace message: {}", 2);
+//! rsutil::log::debug!("Debugging value: {:?}", Box::new(42));
+//! rsutil::log::info!("Application started successfully.");
+//! rsutil::log::warn!("This might cause an issue: {}", "low disk space");
+//! rsutil::log::error!("An error occurred: {}", "error_message");
 //! ```
 //!
 //! These macros are designed to make it easy to switch between debug and release logging behavior
