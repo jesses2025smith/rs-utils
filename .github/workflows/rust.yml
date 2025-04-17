@@ -26,7 +26,7 @@ jobs:
     - name: Publish
       run: >
         cargo publish
-        # --verbose
+        --verbose
         --locked
         --token ${{ secrets.CRATES_TOKEN }}
 
