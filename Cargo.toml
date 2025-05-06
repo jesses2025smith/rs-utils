@@ -1,18 +1,22 @@
 [package]
 name = "rsutil"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "Apache-2.0"
 authors = ["Jesse Smith <jesses2025smith@gmail.com>"]
 description = "`rsutil` is a Rust library providing common utilities."
-homepage = "https://github.com/jesses2025smith/rsutil"
-repository = "https://github.com/jesses2025smith/rsutil"
+homepage = "https://github.com/jesses2025smith/rs-utils"
+repository = "https://github.com/jesses2025smith/rs-utils"
 
 [features]
+macros = []
 types = []
 
-full = ["log", "types"]
+full = ["log", "macros", "types"]
 
 [dependencies.log]
 optional = true
 version = "0.4"
+
+[dev-dependencies]
+thiserror = "2"
