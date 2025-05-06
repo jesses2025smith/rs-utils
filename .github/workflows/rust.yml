@@ -13,20 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Run types's tests
+    - name: Run tests
       run: >
         cargo test
-        --features types
-        # --verbose
-    - name: Run log's tests
-      run: >
-        cargo test
-        --features log
+        --features full
         # --verbose
     - name: Publish
       run: >
         cargo publish
-        # --verbose
         --locked
         --token ${{ secrets.CRATES_TOKEN }}
+        # --verbose
 
