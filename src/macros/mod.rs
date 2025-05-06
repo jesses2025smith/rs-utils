@@ -11,7 +11,6 @@ macro_rules! enum_extend {
     ) => {
         #[repr($value_type)]
         $(#[$meta])*
-        #[derive(PartialEq)]
         $vis enum $name {
             $( $(#[$variant_meta])* $variant = $value, )*
         }
@@ -48,7 +47,7 @@ mod tests {
     #[test]
     fn test_enum_extend() {
         enum_extend!(
-            #[derive(Debug)]
+            #[derive(Debug, PartialEq)]
             enum A {
                 T1 = 0x01,
                 T2 = 0x02,
