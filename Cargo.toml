@@ -1,6 +1,6 @@
 [package]
 name = "rsutil"
-version = "0.1.5"
+version = "0.1.6"
 edition = "2021"
 license = "Apache-2.0"
 authors = ["Jesse Smith <jesses2025smith@gmail.com>"]
@@ -17,5 +17,6 @@ types = []
 full = ["log", "macros", "py", "types"]
 
 [dev-dependencies]
+log = "0.4"
 thiserror = "2"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }

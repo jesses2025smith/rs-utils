@@ -18,7 +18,9 @@
 //!
 //! ```rust
 //!
+//! rsutil::trace!();
 //! rsutil::trace!("This is a trace message: {}", 2);
+//! rsutil::trace!("This is a trace", );
 //! rsutil::debug!("Debugging value: {:?}", Box::new(42));
 //! rsutil::info!("Application started successfully.");
 //! rsutil::warn!("This might cause an issue: {}", "low disk space");
@@ -30,38 +32,70 @@
 
 #[macro_export]
 macro_rules! trace {
-    ($($x:expr),*) => {{
+    () => {{
+        println!();
+    }};
+
+    ($($x:tt)*) => {{
         #[cfg(debug_assertions)]
-        println!("\x1b[95m[ TRACE] - {}\x1b[0m", format_args!($($x),*));
+        println!("\x1b[95m[ TRACE] - {}\x1b[0m", format_args!($($x)*));
+        #[cfg(not(debug_assertions))]
+        log::trace!($($x)*);
     }};
 }
 
 #[macro_export]
 macro_rules! debug {
-    ($($x:expr),*) => {{
+    () => {{
+        println!();
+    }};
+
+    ($($x:tt)*) => {{
         #[cfg(debug_assertions)]
-        println!("\x1b[96m[ DEBUG] - {}\x1b[0m", format_args!($($x),*));
+        println!("\x1b[96m[ DEBUG] - {}\x1b[0m", format_args!($($x)*));
+        #[cfg(not(debug_assertions))]
+        log::debug!($($x)*);
     }};
 }
 
 #[macro_export]
 macro_rules! info {
-    ($($x:expr),*) => {{
+    () => {{
+        println!();
+    }};
+
+    ($($x:tt)*) => {{
         #[cfg(debug_assertions)]
-        println!("\x1b[32m[  INFO] - {}\x1b[0m", format_args!($($x),*));
+        println!("\x1b[32m[  INFO] - {}\x1b[0m", format_args!($($x)*));
+        #[cfg(not(debug_assertions))]
+        log::info!($($x)*);
     }};
 }
 
 #[macro_export]
 macro_rules! warn {
-    ($($x:expr),*) => {{
-        println!("\x1b[33m[  WARN] - {}\x1b[0m", format_args!($($x),*));
+    () => {{
+        println!();
+    }};
+
+    ($($x:tt)*) => {{
+        #[cfg(debug_assertions)]
+        println!("\x1b[33m[  WARN] - {}\x1b[0m", format_args!($($x)*));
+        #[cfg(not(debug_assertions))]
+        log::warn!($($x)*);
     }};
 }
 
 #[macro_export]
 macro_rules! error {
-    ($($x:expr),*) => {{
-        println!("\x1b[31m[ ERROR] - {}\x1b[0m", format_args!($($x),*));
+    () => {{
+        println!();
+    }};
+
+    ($($x:tt)*) => {{
+        #[cfg(debug_assertions)]
+        println!("\x1b[31m[ ERROR] - {}\x1b[0m", format_args!($($x)*));
+        #[cfg(not(debug_assertions))]
+        log::error!($($x)*);
     }};
 }

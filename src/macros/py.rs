@@ -34,7 +34,7 @@ macro_rules! with {
                 $name.__exit__();
                 result
             }
-            Err(e) => Err(e)
+            Err(e) => Err(e),
         }
     }};
 }
@@ -87,7 +87,7 @@ macro_rules! async_with {
 
                     result
                 }
-                Err(e) => Err(e)
+                Err(e) => Err(e),
             }
         }
     }};
