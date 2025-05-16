@@ -30,7 +30,7 @@
 //! These macros are designed to make it easy to switch between debug and release logging behavior
 //! without changing the code.
 
-use chrono::Utc;
+use chrono::Local;
 use log::LevelFilter;
 use log4rs::{
     append::{
@@ -238,7 +238,8 @@ impl<'a> Log4rsConfig<'a> {
                     "{}/{}-{}.log",
                     filepath,
                     filename,
-                    Utc::now().format("%Y-%m-%d %H_%M_%S")
+                    Local::now()
+                        .format("%Y-%m-%d %H_%M_%S")
                 ))?;
             builder = builder.appender(
                 Appender::builder()
