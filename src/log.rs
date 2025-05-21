@@ -242,8 +242,7 @@ mod log4rs {
                         "{}/{}-{}.log",
                         filepath,
                         filename,
-                        Local::now()
-                            .format("%Y-%m-%d %H_%M_%S")
+                        Local::now().format("%Y-%m-%d %H_%M_%S")
                     ))?;
                 builder = builder.appender(
                     Appender::builder()
@@ -254,7 +253,8 @@ mod log4rs {
                 );
                 root = root.appender("file");
             }
-            let config = builder.build(root.build(self.root_level.unwrap_or(LevelFilter::Trace)))?;
+            let config =
+                builder.build(root.build(self.root_level.unwrap_or(LevelFilter::Trace)))?;
 
             // Use this to change log levels at runtime.
             // This means you can change the default log level to trace

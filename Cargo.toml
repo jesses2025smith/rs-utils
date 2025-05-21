@@ -1,6 +1,6 @@
 [package]
 name = "rsutil"
-version = "0.1.10"
+version = "0.1.11"
 edition = "2021"
 license = "Apache-2.0"
 authors = ["Jesse Smith <jesses2025smith@gmail.com>"]
@@ -9,13 +9,18 @@ homepage = "https://github.com/jesses2025smith/rs-utils"
 repository = "https://github.com/jesses2025smith/rs-utils"
 
 [features]
+default = ["types"]
 log = []
+log4rs = ["chrono", "dep:log", "dep:log4rs"]
 macros = []
 py = []
 types = []
-log4rs = ["chrono", "dep:log", "dep:log4rs"]
 
 full = ["log", "log4rs", "macros", "py", "types"]
+
+[dependencies.chrono]
+version = "0.4"
+optional = true
 
 [dependencies.log]
 version = "0.4"
@@ -23,10 +28,6 @@ optional = true
 
 [dependencies.log4rs]
 version = "1"
-optional = true
-
-[dependencies.chrono]
-version = "0.4"
 optional = true
 
 [dev-dependencies]

@@ -19,17 +19,18 @@
 ///     }
 /// }
 ///
-/// with!(A {} => |a| {
+/// with!(A {} => |a, enter| {
+///     println!("__enter__ return: {:?}", enter);
 ///     println!("body");
 ///
 ///     Ok::<_, String>(())
 /// }).unwrap();
 #[macro_export]
 macro_rules! with {
-    ($init:expr => |$name:ident| $body:block) => {{
+    ($init:expr => |$name:ident, $res:ident| $body:block) => {{
         let mut $name = $init;
         match $name.__enter__() {
-            Ok(()) => {
+            Ok($res) => {
                 let result = $body;
                 $name.__exit__();
                 result
@@ -67,7 +68,8 @@ macro_rules! with {
 ///
 /// #[tokio::test]
 /// async fn example() {
-///     async_with!(A {} => |a| {
+///     async_with!(A {} => |a, enter| {
+///         println!("__aenter__ return: {:?}", enter);
 ///         println!("body");
 ///         a.test().await?;
 ///         Ok::<_, String>(())
@@ -77,11 +79,11 @@ macro_rules! with {
 /// }
 #[macro_export]
 macro_rules! async_with {
-    ($init:expr => |$name:ident| $body:block) => {{
+    ($init:expr => |$name:ident, $res:ident| $body:block) => {{
         let mut $name = $init;
         async move {
             match $name.__aenter__().await {
-                Ok(()) => {
+                Ok($res) => {
                     let result = (async { $body }).await;
                     $name.__aexit__().await;
 
