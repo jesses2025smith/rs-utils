@@ -1,6 +1,6 @@
 [package]
 name = "rsutil"
-version = "0.1.11"
+version = "0.1.12"
 edition = "2021"
 license = "Apache-2.0"
 authors = ["Jesse Smith <jesses2025smith@gmail.com>"]
@@ -9,7 +9,6 @@ homepage = "https://github.com/jesses2025smith/rs-utils"
 repository = "https://github.com/jesses2025smith/rs-utils"
 
 [features]
-default = ["types"]
 log = []
 log4rs = ["chrono", "dep:log", "dep:log4rs"]
 macros = []
