@@ -45,7 +45,11 @@
 /// #[cfg(target_endian = "big")]
 /// assert!(order.is_native());
 /// ```
-#[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash)]
+
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash, Deserialize, Serialize)]
+#[serde(rename_all = "lowercase")]
 pub enum ByteOrder {
     Big,
     #[default]

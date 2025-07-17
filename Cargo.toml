@@ -1,6 +1,6 @@
 [package]
 name = "rsutil"
-version = "0.1.12"
+version = "0.1.13"
 edition = "2021"
 license = "Apache-2.0"
 authors = ["Jesse Smith <jesses2025smith@gmail.com>"]
@@ -13,7 +13,7 @@ log = []
 log4rs = ["chrono", "dep:log", "dep:log4rs"]
 macros = []
 py = []
-types = []
+types = ["serde"]
 
 full = ["log", "log4rs", "macros", "py", "types"]
 
@@ -28,6 +28,11 @@ optional = true
 [dependencies.log4rs]
 version = "1"
 optional = true
+
+[dependencies.serde]
+version = "1"
+optional = true
+features = ["derive"]
 
 [dev-dependencies]
 log = "0.4"
