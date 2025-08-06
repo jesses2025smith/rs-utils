@@ -32,9 +32,7 @@
 
 #[macro_export]
 macro_rules! trace {
-    () => {{
-        println!();
-    }};
+    () => {{}};
 
     ($($x:tt)*) => {{
         #[cfg(debug_assertions)]
@@ -60,9 +58,7 @@ macro_rules! debug {
 
 #[macro_export]
 macro_rules! info {
-    () => {{
-        println!();
-    }};
+    () => {{}};
 
     ($($x:tt)*) => {{
         #[cfg(debug_assertions)]
@@ -74,9 +70,7 @@ macro_rules! info {
 
 #[macro_export]
 macro_rules! warn {
-    () => {{
-        println!();
-    }};
+    () => {{}};
 
     ($($x:tt)*) => {{
         #[cfg(debug_assertions)]
@@ -88,9 +82,7 @@ macro_rules! warn {
 
 #[macro_export]
 macro_rules! error {
-    () => {{
-        println!();
-    }};
+    () => {{}};
 
     ($($x:tt)*) => {{
         #[cfg(debug_assertions)]
@@ -99,6 +91,71 @@ macro_rules! error {
         log::error!($($x)*);
     }};
 }
+
+/// Logger object
+///
+/// # Examples
+///
+/// ```rust
+/// use rsutil::log::LogCat;
+/// let logger = LogCat::new("APP");
+///
+/// logger.trace(format_args!("This is a trace message: {}", 2));
+/// logger.trace(format_args!("This is a trace", ));
+/// logger.debug(format_args!("Debugging value: {:?}", Box::new(42)));
+/// logger.info(format_args!("Application started successfully."));
+/// logger.warn(format_args!("This might cause an issue: {}", "low disk space"));
+/// logger.error(format_args!("An error occurred: {}", "error_message"));
+/// ```
+#[derive(Debug, Default)]
+pub struct LogCat {
+    tag: &'static str,
+}
+
+unsafe impl Send for LogCat {}
+unsafe impl Sync for LogCat {}
+
+impl LogCat {
+    pub fn new(tag: &'static str) -> Self {
+        Self { tag }
+    }
+
+    #[track_caller]
+    #[inline(always)]
+    pub fn trace(&self, args: std::fmt::Arguments) {
+        let loc = std::panic::Location::caller();
+        trace!("{} - {} ({}:{})", self.tag, args, loc.file(), loc.line());
+    }
+
+    #[track_caller]
+    #[inline(always)]
+    pub fn debug(&self, args: std::fmt::Arguments) {
+        let loc = std::panic::Location::caller();
+        debug!("{} - {} ({}:{})", self.tag, args, loc.file(), loc.line());
+    }
+
+    #[track_caller]
+    #[inline(always)]
+    pub fn info(&self, args: std::fmt::Arguments) {
+        let loc = std::panic::Location::caller();
+        info!("{} - {} ({}:{})", self.tag, args, loc.file(), loc.line());
+    }
+
+    #[track_caller]
+    #[inline(always)]
+    pub fn warn(&self, args: std::fmt::Arguments) {
+        let loc = std::panic::Location::caller();
+        warn!("{} - {} ({}:{})", self.tag, args, loc.file(), loc.line());
+    }
+
+    #[track_caller]
+    #[inline(always)]
+    pub fn error(&self, args: std::fmt::Arguments) {
+        let loc = std::panic::Location::caller();
+        error!("{} - {} ({}:{})", self.tag, args, loc.file(), loc.line());
+    }
+}
+
 
 #[cfg(feature = "log4rs")]
 pub use log4rs::Log4rsConfig;
