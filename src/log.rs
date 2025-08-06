@@ -107,7 +107,7 @@ macro_rules! error {
 /// logger.warn(format_args!("This might cause an issue: {}", "low disk space"));
 /// logger.error(format_args!("An error occurred: {}", "error_message"));
 /// ```
-#[derive(Debug, Default)]
+#[derive(Debug, Copy, Clone, Default)]
 pub struct LogCat {
     tag: &'static str,
 }
