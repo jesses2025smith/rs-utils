@@ -1,6 +1,6 @@
 [package]
 name = "rsutil"
-version = "0.1.16"
+version = "0.1.18"
 edition = "2021"
 license = "Apache-2.0"
 authors = ["Jesse Smith <jesses2025smith@gmail.com>"]

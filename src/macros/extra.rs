@@ -51,7 +51,11 @@ mod tests {
             enum A {
                 T1 = 0x01,
                 T2 = 0x02,
-            }, u8, Error, InvalidValue);
+            },
+            u8,
+            Error,
+            InvalidValue
+        );
 
         assert_eq!(<A as TryFrom<u8>>::try_from(3), Err(Error::InvalidValue(3)));
         assert_eq!(<A as TryFrom<u8>>::try_from(1), Ok(A::T1));
