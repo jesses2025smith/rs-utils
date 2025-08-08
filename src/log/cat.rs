@@ -27,7 +27,7 @@ impl LogCat {
     }
 }
 
-#[cfg(debug_assertions)]
+#[cfg(all(debug_assertions, feature = "log-lineno"))]
 impl LogCat {
     #[track_caller]
     #[inline(always)]
@@ -91,6 +91,54 @@ impl LogCat {
             args,
             loc.file(),
             loc.line()
+        );
+    }
+}
+
+#[cfg(all(debug_assertions, not(feature = "log-lineno")))]
+impl LogCat {
+    #[inline(always)]
+    pub fn trace(&self, args: std::fmt::Arguments) {
+        println!(
+            "\x1b[95m[ TRACE] - {} - {}\x1b[0m",
+            self.tag,
+            args,
+        );
+    }
+
+    #[inline(always)]
+    pub fn debug(&self, args: std::fmt::Arguments) {
+        println!(
+            "\x1b[96m[ DEBUG] - {} - {}\x1b[0m",
+            self.tag,
+            args,
+        );
+    }
+
+    #[inline(always)]
+    pub fn info(&self, args: std::fmt::Arguments) {
+        println!(
+            "\x1b[32m[  INFO] - {} - {}\x1b[0m",
+            self.tag,
+            args,
+        );
+    }
+
+    #[inline(always)]
+    pub fn warn(&self, args: std::fmt::Arguments) {
+        println!(
+            "\x1b[33m[  WARN] - {} - {}\x1b[0m",
+            self.tag,
+            args,
+        );
+    }
+
+    #[inline(always)]
+    pub fn error(&self, args: std::fmt::Arguments) {
+        println!(
+            "\x1b[31m[ ERROR] - {} - {}\x1b[0m",
+            self.tag,
+            args,
         );
     }
 }
