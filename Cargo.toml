@@ -40,3 +40,11 @@ features = ["derive"]
 log = "0.4"
 thiserror = "2"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+
+[lints.rust]
+unused_imports = "deny"
+unused_results = "deny"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
