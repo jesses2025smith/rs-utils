@@ -12,14 +12,25 @@ jobs:
     name: Publish to crates.io
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Clippy check
       run: >
         cargo clippy -- -D warnings
+    - name: Run debug log feature tests
+      run: >
+        cargo test
+        --features log-lineno
+        # --verbose
     - name: Run debug tests
       run: >
         cargo test
         --features full
+        # --verbose
+    - name: Run release log feature tests
+      run: >
+        cargo test
+        --release
+        --features log
         # --verbose
     - name: Run release tests
       run: >
