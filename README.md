@@ -15,7 +15,6 @@ Add the following to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-log = "0.4" # A compile error occurs in release mode unless the [log] feature is enabled.
 rsutil = { version = "0.1", features = ["full"] }
 ```
 
